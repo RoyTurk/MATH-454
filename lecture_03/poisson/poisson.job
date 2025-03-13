@@ -1,0 +1,5 @@
+#!/bin/bash -l
+#SBATCH --qos=math-454
+#SBATCH --account=math-454
+
+perf stat ./poisson

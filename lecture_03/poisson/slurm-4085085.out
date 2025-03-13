@@ -1,0 +1,8 @@
+nb steps 2600 [l2 = 0.00499905]
+[ perf record: Woken up 7547 times to write data ]
+Warning:
+Processed 242054 events and lost 2 chunks!
+
+Check IO/CPU overload!
+
+[ perf record: Captured and wrote 1886.696 MB perf.data (234393 samples) ]

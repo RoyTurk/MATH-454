@@ -30,7 +30,7 @@ std::tuple<float, int> Simulation::compute() {
 
     m_grids.swap();
 
-    m_dumper->dump(s);
+    /*m_dumper->dump(s);*/
     ++s;
   } while (l2 > m_epsilon);
 
