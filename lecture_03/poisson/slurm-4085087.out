@@ -1,0 +1,19 @@
+nb steps 2600 [l2 = 0.00499905]
+
+ Performance counter stats for './poisson':
+
+         36,147.12 msec task-clock:u              #    1.000 CPUs utilized          
+                 0      context-switches:u        #    0.000 /sec                   
+                 0      cpu-migrations:u          #    0.000 /sec                   
+             1,706      page-faults:u             #   47.196 /sec                   
+   121,952,134,670      cycles:u                  #    3.374 GHz                    
+    54,611,165,872      instructions:u            #    0.45  insn per cycle         
+     2,751,491,060      branches:u                #   76.119 M/sec                  
+         2,729,768      branch-misses:u           #    0.10% of all branches        
+
+      36.156591466 seconds time elapsed
+
+      36.033649000 seconds user
+       0.006974000 seconds sys
+
+
