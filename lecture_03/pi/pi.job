@@ -1,0 +1,8 @@
+#!/bin/bash
+#SBATCH --qos=math-454
+#SBATCH --account=math-454
+#SBATCH -c 2
+
+export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK$
+./pi
+
