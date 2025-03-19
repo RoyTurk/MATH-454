@@ -25,7 +25,7 @@ const int n = 10000000;
 
 int main(int /* argc */ , char ** /* argv */) {
   int i;
-  double dx, x, sum, pi;
+  double dx, x, sum, lsum, pi;
   int nthreads;
 
 
@@ -38,17 +38,25 @@ int main(int /* argc */ , char ** /* argv */) {
 #endif
   auto t1 = clk::now();
 
-  /* calculate pi = integral [0..1] 4 / (1 + x**2) dx */
-  dx = 1. / n;
-  sum = 0.0;
-  for (i = 0; i < n; i++) {
-    x = 1. * i * dx;
-    sum = sum + f(x);
+  sum = 0.;
+#pragma omp parallel shared(sum) private(x, lsum)
+  {
+    /* calculate pi = integral [0..1] 4 / (1 + x**2) dx */
+    dx = 1. / n;
+    lsum = 0.0;
+#pragma omp for
+    for (i = 1; i <= n; i++) {
+      x = (1. * i - 0.5) * dx;
+      lsum = lsum + f(x);
+    }
+
+#pragma omp critical
+    sum += lsum;
   }
+
   pi = dx * sum;
 
-
-
+ 
 #ifdef _OPENMP
   auto omp_elapsed = omp_get_wtime() - omp_t1;
 #endif
