@@ -1,9 +1,9 @@
-OPTIM+=-O3 -march=native
+OPTIM+=-O3 -march=native -fopenmp
 CXX=g++
 CC=g++
 LD=$(CXX)
 CXXFLAGS+=-Wall -Wextra -std=c++11 $(OPTIM)
-LDFLAGS+=
+LDFLAGS+=-lm
 EXE=pi
 
 all: clean $(EXE)

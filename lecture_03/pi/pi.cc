@@ -33,6 +33,7 @@ int main(int /* argc */ , char ** /* argv */) {
 
 
 #ifdef _OPENMP
+  nthreads = omp_get_max_threads();
   auto omp_t1 = omp_get_wtime();
 #endif
   auto t1 = clk::now();
