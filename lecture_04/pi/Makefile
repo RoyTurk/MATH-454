@@ -1,34 +1,18 @@
-OPTIM+=-O3 -march=native
+OPTIM+=-O3
 
-# No MPI with gcc. You have to load the module gcc
-CXX=g++
-CC=g++
-
-# MPI with gcc. You have to load the modules gcc and openmpi
-# CXX=mpicxx
-# CC=mpicxx
-
-
-# # No MPI with intel. You have to load the module intel
-# CXX=icpc
-# CC=icc
-# This line below is required by intel compiler in the server
-# CXXFLAGS+=-no-multibyte-chars
-
-# # MPI with intel. You have to load the modules intel and intel-oneapi-mpi
+CXX=mpicxx
+CC=mpicxx
 # CXX=mpiicpc
 # CC=mpiicc
-# # This line below is required by intel compiler in the server
-# CXXFLAGS+=-no-multibyte-chars
-
-
 
 LD=${CXX}
 CXXFLAGS+=-Wall -Wextra -std=c++11 $(OPTIM)
-# LDFLAGS+=-lm
-EXE=pi
+# LDFLAGS+=$(OPTIM) -lm
+LDFLAGS+=$(OPTIM)
 
-all: clean $(EXE)
+EXECS=pi pi_p2p_ring pi_p2p_sendrecv_ring pi_p2p_async_ring pi_gather pi_reduce
+
+all: clean $(EXECS)
 
 clean:
-	rm -f $(EXE) *.o *~
+	rm -f $(EXECS) *.o *~
