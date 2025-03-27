@@ -1,0 +1,717 @@
+# To display the perf.data header info, please use --header/--header-only options.
+#
+#
+# Total Lost Samples: 0
+#
+# Samples: 187  of event 'cycles:u'
+# Event count (approx.): 134194264
+#
+# Children      Self  Command   Shared Object                    Symbol                                                                                                                                                                                                          
+# ........  ........  ........  ...............................  ................................................................................................................................................................................................................
+#
+    97.40%     0.00%  cgsolver  cgsolver                         [.] _start
+            |
+            ---_start
+               __libc_start_main_alias_2 (inlined)
+               __libc_start_call_main
+               main
+               |          
+               |--77.95%--CGSolverSparse::solve
+               |          |          
+               |          |--63.32%--MatrixCOO::mat_vec (inlined)
+               |          |          |          
+               |          |          |--7.97%--std::vector<double, std::allocator<double> >::operator[] (inlined)
+               |          |          |          
+               |          |           --0.59%--std::fill_n<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double> > >, unsigned long, double> (inlined)
+               |          |                     std::__fill_n_a<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double> > >, unsigned long, double> (inlined)
+               |          |                     std::__fill_a<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double> > >, double> (inlined)
+               |          |                     std::__fill_a1<double*, std::vector<double, std::allocator<double> >, double> (inlined)
+               |          |                     std::__fill_a1<double*, double> (inlined)
+               |          |                     __memset_evex_erms
+               |          |          
+               |          |--6.99%--cblas_daxpy
+               |          |          daxpy_k
+               |          |          
+               |          |--5.25%--std::vector<double, std::allocator<double> >::operator=
+               |          |          std::copy<__gnu_cxx::__normal_iterator<double const*, std::vector<double, std::allocator<double> > >, __gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double> > > > (inlined)
+               |          |          std::__copy_move_a<false, __gnu_cxx::__normal_iterator<double const*, std::vector<double, std::allocator<double> > >, __gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double> > > > (inlined)
+               |          |          std::__copy_move_a1<false, double const*, double*> (inlined)
+               |          |          std::__copy_move_a2<false, double const*, double*> (inlined)
+               |          |          std::__copy_move<false, true, std::random_access_iterator_tag>::__copy_m<double> (inlined)
+               |          |          __memcpy_evex_unaligned_erms (inlined)
+               |          |          
+               |           --2.38%--ddot_k
+               |          
+               |--18.84%--CGSolverSparse::read_matrix
+               |          MatrixCOO::read
+               |          |          
+               |           --17.83%--__isoc99_fscanf
+               |                     __vfscanf_internal
+               |                     |          
+               |                     |--3.33%--____strtoll_l_internal (inlined)
+               |                     |          
+               |                     |--2.18%--__GI_____strtod_l_internal
+               |                     |          |          
+               |                     |           --0.62%--round_and_return
+               |                     |          
+               |                      --0.94%--__GI__IO_sputbackc (inlined)
+               |          
+                --0.61%--Solver::init_source_term
+                          0x7f858d5fae07
+
+    97.40%     0.00%  cgsolver  libc.so.6                        [.] __libc_start_main_alias_2 (inlined)
+            |
+            ---__libc_start_main_alias_2 (inlined)
+               __libc_start_call_main
+               main
+               |          
+               |--77.95%--CGSolverSparse::solve
+               |          |          
+               |          |--63.32%--MatrixCOO::mat_vec (inlined)
+               |          |          |          
+               |          |          |--7.97%--std::vector<double, std::allocator<double> >::operator[] (inlined)
+               |          |          |          
+               |          |           --0.59%--std::fill_n<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double> > >, unsigned long, double> (inlined)
+               |          |                     std::__fill_n_a<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double> > >, unsigned long, double> (inlined)
+               |          |                     std::__fill_a<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double> > >, double> (inlined)
+               |          |                     std::__fill_a1<double*, std::vector<double, std::allocator<double> >, double> (inlined)
+               |          |                     std::__fill_a1<double*, double> (inlined)
+               |          |                     __memset_evex_erms
+               |          |          
+               |          |--6.99%--cblas_daxpy
+               |          |          daxpy_k
+               |          |          
+               |          |--5.25%--std::vector<double, std::allocator<double> >::operator=
+               |          |          std::copy<__gnu_cxx::__normal_iterator<double const*, std::vector<double, std::allocator<double> > >, __gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double> > > > (inlined)
+               |          |          std::__copy_move_a<false, __gnu_cxx::__normal_iterator<double const*, std::vector<double, std::allocator<double> > >, __gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double> > > > (inlined)
+               |          |          std::__copy_move_a1<false, double const*, double*> (inlined)
+               |          |          std::__copy_move_a2<false, double const*, double*> (inlined)
+               |          |          std::__copy_move<false, true, std::random_access_iterator_tag>::__copy_m<double> (inlined)
+               |          |          __memcpy_evex_unaligned_erms (inlined)
+               |          |          
+               |           --2.38%--ddot_k
+               |          
+               |--18.84%--CGSolverSparse::read_matrix
+               |          MatrixCOO::read
+               |          |          
+               |           --17.83%--__isoc99_fscanf
+               |                     __vfscanf_internal
+               |                     |          
+               |                     |--3.33%--____strtoll_l_internal (inlined)
+               |                     |          
+               |                     |--2.18%--__GI_____strtod_l_internal
+               |                     |          |          
+               |                     |           --0.62%--round_and_return
+               |                     |          
+               |                      --0.94%--__GI__IO_sputbackc (inlined)
+               |          
+                --0.61%--Solver::init_source_term
+                          0x7f858d5fae07
+
+    97.40%     0.00%  cgsolver  libc.so.6                        [.] __libc_start_call_main
+            |
+            ---__libc_start_call_main
+               main
+               |          
+               |--77.95%--CGSolverSparse::solve
+               |          |          
+               |          |--63.32%--MatrixCOO::mat_vec (inlined)
+               |          |          |          
+               |          |          |--7.97%--std::vector<double, std::allocator<double> >::operator[] (inlined)
+               |          |          |          
+               |          |           --0.59%--std::fill_n<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double> > >, unsigned long, double> (inlined)
+               |          |                     std::__fill_n_a<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double> > >, unsigned long, double> (inlined)
+               |          |                     std::__fill_a<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double> > >, double> (inlined)
+               |          |                     std::__fill_a1<double*, std::vector<double, std::allocator<double> >, double> (inlined)
+               |          |                     std::__fill_a1<double*, double> (inlined)
+               |          |                     __memset_evex_erms
+               |          |          
+               |          |--6.99%--cblas_daxpy
+               |          |          daxpy_k
+               |          |          
+               |          |--5.25%--std::vector<double, std::allocator<double> >::operator=
+               |          |          std::copy<__gnu_cxx::__normal_iterator<double const*, std::vector<double, std::allocator<double> > >, __gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double> > > > (inlined)
+               |          |          std::__copy_move_a<false, __gnu_cxx::__normal_iterator<double const*, std::vector<double, std::allocator<double> > >, __gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double> > > > (inlined)
+               |          |          std::__copy_move_a1<false, double const*, double*> (inlined)
+               |          |          std::__copy_move_a2<false, double const*, double*> (inlined)
+               |          |          std::__copy_move<false, true, std::random_access_iterator_tag>::__copy_m<double> (inlined)
+               |          |          __memcpy_evex_unaligned_erms (inlined)
+               |          |          
+               |           --2.38%--ddot_k
+               |          
+               |--18.84%--CGSolverSparse::read_matrix
+               |          MatrixCOO::read
+               |          |          
+               |           --17.83%--__isoc99_fscanf
+               |                     __vfscanf_internal
+               |                     |          
+               |                     |--3.33%--____strtoll_l_internal (inlined)
+               |                     |          
+               |                     |--2.18%--__GI_____strtod_l_internal
+               |                     |          |          
+               |                     |           --0.62%--round_and_return
+               |                     |          
+               |                      --0.94%--__GI__IO_sputbackc (inlined)
+               |          
+                --0.61%--Solver::init_source_term
+                          0x7f858d5fae07
+
+    97.40%     0.00%  cgsolver  cgsolver                         [.] main
+            |
+            ---main
+               |          
+               |--77.95%--CGSolverSparse::solve
+               |          |          
+               |          |--63.32%--MatrixCOO::mat_vec (inlined)
+               |          |          |          
+               |          |          |--7.97%--std::vector<double, std::allocator<double> >::operator[] (inlined)
+               |          |          |          
+               |          |           --0.59%--std::fill_n<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double> > >, unsigned long, double> (inlined)
+               |          |                     std::__fill_n_a<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double> > >, unsigned long, double> (inlined)
+               |          |                     std::__fill_a<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double> > >, double> (inlined)
+               |          |                     std::__fill_a1<double*, std::vector<double, std::allocator<double> >, double> (inlined)
+               |          |                     std::__fill_a1<double*, double> (inlined)
+               |          |                     __memset_evex_erms
+               |          |          
+               |          |--6.99%--cblas_daxpy
+               |          |          daxpy_k
+               |          |          
+               |          |--5.25%--std::vector<double, std::allocator<double> >::operator=
+               |          |          std::copy<__gnu_cxx::__normal_iterator<double const*, std::vector<double, std::allocator<double> > >, __gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double> > > > (inlined)
+               |          |          std::__copy_move_a<false, __gnu_cxx::__normal_iterator<double const*, std::vector<double, std::allocator<double> > >, __gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double> > > > (inlined)
+               |          |          std::__copy_move_a1<false, double const*, double*> (inlined)
+               |          |          std::__copy_move_a2<false, double const*, double*> (inlined)
+               |          |          std::__copy_move<false, true, std::random_access_iterator_tag>::__copy_m<double> (inlined)
+               |          |          __memcpy_evex_unaligned_erms (inlined)
+               |          |          
+               |           --2.38%--ddot_k
+               |          
+               |--18.84%--CGSolverSparse::read_matrix
+               |          MatrixCOO::read
+               |          |          
+               |           --17.83%--__isoc99_fscanf
+               |                     __vfscanf_internal
+               |                     |          
+               |                     |--3.33%--____strtoll_l_internal (inlined)
+               |                     |          
+               |                     |--2.18%--__GI_____strtod_l_internal
+               |                     |          |          
+               |                     |           --0.62%--round_and_return
+               |                     |          
+               |                      --0.94%--__GI__IO_sputbackc (inlined)
+               |          
+                --0.61%--Solver::init_source_term
+                          0x7f858d5fae07
+
+    77.95%    62.73%  cgsolver  cgsolver                         [.] CGSolverSparse::solve
+            |          
+            |--62.73%--_start
+            |          __libc_start_main_alias_2 (inlined)
+            |          __libc_start_call_main
+            |          main
+            |          CGSolverSparse::solve
+            |          MatrixCOO::mat_vec (inlined)
+            |          |          
+            |           --7.97%--std::vector<double, std::allocator<double> >::operator[] (inlined)
+            |          
+             --15.22%--CGSolverSparse::solve
+                       |          
+                       |--6.99%--cblas_daxpy
+                       |          daxpy_k
+                       |          
+                       |--5.25%--std::vector<double, std::allocator<double> >::operator=
+                       |          std::copy<__gnu_cxx::__normal_iterator<double const*, std::vector<double, std::allocator<double> > >, __gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double> > > > (inlined)
+                       |          std::__copy_move_a<false, __gnu_cxx::__normal_iterator<double const*, std::vector<double, std::allocator<double> > >, __gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double> > > > (inlined)
+                       |          std::__copy_move_a1<false, double const*, double*> (inlined)
+                       |          std::__copy_move_a2<false, double const*, double*> (inlined)
+                       |          std::__copy_move<false, true, std::random_access_iterator_tag>::__copy_m<double> (inlined)
+                       |          __memcpy_evex_unaligned_erms (inlined)
+                       |          
+                       |--2.38%--ddot_k
+                       |          
+                        --0.59%--MatrixCOO::mat_vec (inlined)
+                                  std::fill_n<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double> > >, unsigned long, double> (inlined)
+                                  std::__fill_n_a<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double> > >, unsigned long, double> (inlined)
+                                  std::__fill_a<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double> > >, double> (inlined)
+                                  std::__fill_a1<double*, std::vector<double, std::allocator<double> >, double> (inlined)
+                                  std::__fill_a1<double*, double> (inlined)
+                                  __memset_evex_erms
+
+    63.32%     0.00%  cgsolver  cgsolver                         [.] MatrixCOO::mat_vec (inlined)
+            |
+            ---MatrixCOO::mat_vec (inlined)
+               |          
+               |--7.97%--std::vector<double, std::allocator<double> >::operator[] (inlined)
+               |          
+                --0.59%--std::fill_n<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double> > >, unsigned long, double> (inlined)
+                          std::__fill_n_a<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double> > >, unsigned long, double> (inlined)
+                          std::__fill_a<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double> > >, double> (inlined)
+                          std::__fill_a1<double*, std::vector<double, std::allocator<double> >, double> (inlined)
+                          std::__fill_a1<double*, double> (inlined)
+                          __memset_evex_erms
+
+    18.84%     0.62%  cgsolver  cgsolver                         [.] MatrixCOO::read
+            |          
+            |--18.22%--MatrixCOO::read
+            |          |          
+            |           --17.83%--__isoc99_fscanf
+            |                     __vfscanf_internal
+            |                     |          
+            |                     |--3.33%--____strtoll_l_internal (inlined)
+            |                     |          
+            |                     |--2.18%--__GI_____strtod_l_internal
+            |                     |          |          
+            |                     |           --0.62%--round_and_return
+            |                     |          
+            |                      --0.94%--__GI__IO_sputbackc (inlined)
+            |          
+             --0.62%--_start
+                       __libc_start_main_alias_2 (inlined)
+                       __libc_start_call_main
+                       main
+                       CGSolverSparse::read_matrix
+                       MatrixCOO::read
+
+    18.84%     0.00%  cgsolver  cgsolver                         [.] CGSolverSparse::read_matrix
+            |
+            ---CGSolverSparse::read_matrix
+               MatrixCOO::read
+               |          
+                --17.83%--__isoc99_fscanf
+                          __vfscanf_internal
+                          |          
+                          |--3.33%--____strtoll_l_internal (inlined)
+                          |          
+                          |--2.18%--__GI_____strtod_l_internal
+                          |          |          
+                          |           --0.62%--round_and_return
+                          |          
+                           --0.94%--__GI__IO_sputbackc (inlined)
+
+    17.83%     0.00%  cgsolver  libc.so.6                        [.] __isoc99_fscanf
+            |
+            ---__isoc99_fscanf
+               __vfscanf_internal
+               |          
+               |--3.33%--____strtoll_l_internal (inlined)
+               |          
+               |--2.18%--__GI_____strtod_l_internal
+               |          |          
+               |           --0.62%--round_and_return
+               |          
+                --0.94%--__GI__IO_sputbackc (inlined)
+
+    17.83%    11.38%  cgsolver  libc.so.6                        [.] __vfscanf_internal
+            |          
+            |--11.38%--_start
+            |          __libc_start_main_alias_2 (inlined)
+            |          __libc_start_call_main
+            |          main
+            |          CGSolverSparse::read_matrix
+            |          MatrixCOO::read
+            |          __isoc99_fscanf
+            |          __vfscanf_internal
+            |          
+             --6.45%--__vfscanf_internal
+                       |          
+                       |--3.33%--____strtoll_l_internal (inlined)
+                       |          
+                       |--2.18%--__GI_____strtod_l_internal
+                       |          |          
+                       |           --0.62%--round_and_return
+                       |          
+                        --0.94%--__GI__IO_sputbackc (inlined)
+
+     7.97%     0.00%  cgsolver  cgsolver                         [.] std::vector<double, std::allocator<double> >::operator[] (inlined)
+            |
+            ---std::vector<double, std::allocator<double> >::operator[] (inlined)
+
+     6.99%     6.99%  cgsolver  libopenblas_skylakex-r0.3.20.so  [.] daxpy_k
+            |
+            ---_start
+               __libc_start_main_alias_2 (inlined)
+               __libc_start_call_main
+               main
+               CGSolverSparse::solve
+               cblas_daxpy
+               daxpy_k
+
+     6.99%     0.00%  cgsolver  libopenblas_skylakex-r0.3.20.so  [.] cblas_daxpy
+            |
+            ---cblas_daxpy
+               daxpy_k
+
+     5.25%     5.25%  cgsolver  libc.so.6                        [.] __memmove_evex_unaligned_erms
+            |
+            ---_start
+               __libc_start_main_alias_2 (inlined)
+               __libc_start_call_main
+               main
+               CGSolverSparse::solve
+               std::vector<double, std::allocator<double> >::operator=
+               std::copy<__gnu_cxx::__normal_iterator<double const*, std::vector<double, std::allocator<double> > >, __gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double> > > > (inlined)
+               std::__copy_move_a<false, __gnu_cxx::__normal_iterator<double const*, std::vector<double, std::allocator<double> > >, __gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double> > > > (inlined)
+               std::__copy_move_a1<false, double const*, double*> (inlined)
+               std::__copy_move_a2<false, double const*, double*> (inlined)
+               std::__copy_move<false, true, std::random_access_iterator_tag>::__copy_m<double> (inlined)
+               __memcpy_evex_unaligned_erms (inlined)
+
+     5.25%     0.00%  cgsolver  cgsolver                         [.] std::vector<double, std::allocator<double> >::operator=
+            |
+            ---std::vector<double, std::allocator<double> >::operator=
+               std::copy<__gnu_cxx::__normal_iterator<double const*, std::vector<double, std::allocator<double> > >, __gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double> > > > (inlined)
+               std::__copy_move_a<false, __gnu_cxx::__normal_iterator<double const*, std::vector<double, std::allocator<double> > >, __gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double> > > > (inlined)
+               std::__copy_move_a1<false, double const*, double*> (inlined)
+               std::__copy_move_a2<false, double const*, double*> (inlined)
+               std::__copy_move<false, true, std::random_access_iterator_tag>::__copy_m<double> (inlined)
+               __memcpy_evex_unaligned_erms (inlined)
+
+     5.25%     0.00%  cgsolver  cgsolver                         [.] std::copy<__gnu_cxx::__normal_iterator<double const*, std::vector<double, std::allocator<double> > >, __gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double> > > > (inlined)
+            |
+            ---std::copy<__gnu_cxx::__normal_iterator<double const*, std::vector<double, std::allocator<double> > >, __gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double> > > > (inlined)
+               std::__copy_move_a<false, __gnu_cxx::__normal_iterator<double const*, std::vector<double, std::allocator<double> > >, __gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double> > > > (inlined)
+               std::__copy_move_a1<false, double const*, double*> (inlined)
+               std::__copy_move_a2<false, double const*, double*> (inlined)
+               std::__copy_move<false, true, std::random_access_iterator_tag>::__copy_m<double> (inlined)
+               __memcpy_evex_unaligned_erms (inlined)
+
+     5.25%     0.00%  cgsolver  cgsolver                         [.] std::__copy_move_a<false, __gnu_cxx::__normal_iterator<double const*, std::vector<double, std::allocator<double> > >, __gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double> > > > (inlined)
+            |
+            ---std::__copy_move_a<false, __gnu_cxx::__normal_iterator<double const*, std::vector<double, std::allocator<double> > >, __gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double> > > > (inlined)
+               std::__copy_move_a1<false, double const*, double*> (inlined)
+               std::__copy_move_a2<false, double const*, double*> (inlined)
+               std::__copy_move<false, true, std::random_access_iterator_tag>::__copy_m<double> (inlined)
+               __memcpy_evex_unaligned_erms (inlined)
+
+     5.25%     0.00%  cgsolver  cgsolver                         [.] std::__copy_move_a1<false, double const*, double*> (inlined)
+            |
+            ---std::__copy_move_a1<false, double const*, double*> (inlined)
+               std::__copy_move_a2<false, double const*, double*> (inlined)
+               std::__copy_move<false, true, std::random_access_iterator_tag>::__copy_m<double> (inlined)
+               __memcpy_evex_unaligned_erms (inlined)
+
+     5.25%     0.00%  cgsolver  cgsolver                         [.] std::__copy_move_a2<false, double const*, double*> (inlined)
+            |
+            ---std::__copy_move_a2<false, double const*, double*> (inlined)
+               std::__copy_move<false, true, std::random_access_iterator_tag>::__copy_m<double> (inlined)
+               __memcpy_evex_unaligned_erms (inlined)
+
+     5.25%     0.00%  cgsolver  cgsolver                         [.] std::__copy_move<false, true, std::random_access_iterator_tag>::__copy_m<double> (inlined)
+            |
+            ---std::__copy_move<false, true, std::random_access_iterator_tag>::__copy_m<double> (inlined)
+               __memcpy_evex_unaligned_erms (inlined)
+
+     5.25%     0.00%  cgsolver  libc.so.6                        [.] __memcpy_evex_unaligned_erms (inlined)
+            |
+            ---__memcpy_evex_unaligned_erms (inlined)
+
+     3.33%     3.33%  cgsolver  libc.so.6                        [.] __GI_____strtoll_l_internal
+            |
+            ---_start
+               __libc_start_main_alias_2 (inlined)
+               __libc_start_call_main
+               main
+               CGSolverSparse::read_matrix
+               MatrixCOO::read
+               __isoc99_fscanf
+               __vfscanf_internal
+               ____strtoll_l_internal (inlined)
+
+     3.33%     0.00%  cgsolver  libc.so.6                        [.] ____strtoll_l_internal (inlined)
+            |
+            ---____strtoll_l_internal (inlined)
+
+     2.60%     0.00%  cgsolver  ld-linux-x86-64.so.2             [.] .annobin__dl_help.end (inlined)
+            |
+            ---.annobin__dl_help.end (inlined)
+               |          
+                --2.60%--_dl_start
+                          |          
+                           --2.58%--_dl_start_final (inlined)
+                                     _dl_sysdep_start
+                                     |          
+                                      --2.52%--dl_main
+                                                |          
+                                                 --2.17%--_dl_relocate_object
+                                                           elf_dynamic_do_Rela (inlined)
+                                                           elf_machine_rela (inlined)
+                                                           |          
+                                                            --1.62%--_dl_lookup_symbol_x
+                                                                      |          
+                                                                      |--0.63%--do_lookup_x
+                                                                      |          
+                                                                       --0.62%--dl_new_hash (inlined)
+
+     2.60%     0.00%  cgsolver  ld-linux-x86-64.so.2             [.] _dl_start
+            |
+            ---_dl_start
+               |          
+                --2.58%--_dl_start_final (inlined)
+                          _dl_sysdep_start
+                          |          
+                           --2.52%--dl_main
+                                     |          
+                                      --2.17%--_dl_relocate_object
+                                                elf_dynamic_do_Rela (inlined)
+                                                elf_machine_rela (inlined)
+                                                |          
+                                                 --1.62%--_dl_lookup_symbol_x
+                                                           |          
+                                                           |--0.63%--do_lookup_x
+                                                           |          
+                                                            --0.62%--dl_new_hash (inlined)
+
+     2.58%     0.00%  cgsolver  ld-linux-x86-64.so.2             [.] _dl_start_final (inlined)
+            |
+            ---_dl_start_final (inlined)
+               _dl_sysdep_start
+               |          
+                --2.52%--dl_main
+                          |          
+                           --2.17%--_dl_relocate_object
+                                     elf_dynamic_do_Rela (inlined)
+                                     elf_machine_rela (inlined)
+                                     |          
+                                      --1.62%--_dl_lookup_symbol_x
+                                                |          
+                                                |--0.63%--do_lookup_x
+                                                |          
+                                                 --0.62%--dl_new_hash (inlined)
+
+     2.58%     0.00%  cgsolver  ld-linux-x86-64.so.2             [.] _dl_sysdep_start
+            |
+            ---_dl_sysdep_start
+               |          
+                --2.52%--dl_main
+                          |          
+                           --2.17%--_dl_relocate_object
+                                     elf_dynamic_do_Rela (inlined)
+                                     elf_machine_rela (inlined)
+                                     |          
+                                      --1.62%--_dl_lookup_symbol_x
+                                                |          
+                                                |--0.63%--do_lookup_x
+                                                |          
+                                                 --0.62%--dl_new_hash (inlined)
+
+     2.52%     0.00%  cgsolver  ld-linux-x86-64.so.2             [.] dl_main
+            |
+            ---dl_main
+               |          
+                --2.17%--_dl_relocate_object
+                          elf_dynamic_do_Rela (inlined)
+                          elf_machine_rela (inlined)
+                          |          
+                           --1.62%--_dl_lookup_symbol_x
+                                     |          
+                                     |--0.63%--do_lookup_x
+                                     |          
+                                      --0.62%--dl_new_hash (inlined)
+
+     2.38%     2.38%  cgsolver  libopenblas_skylakex-r0.3.20.so  [.] ddot_k
+            |
+            ---_start
+               __libc_start_main_alias_2 (inlined)
+               __libc_start_call_main
+               main
+               CGSolverSparse::solve
+               ddot_k
+
+     2.18%     1.56%  cgsolver  libc.so.6                        [.] __GI_____strtod_l_internal
+            |          
+            |--1.56%--_start
+            |          __libc_start_main_alias_2 (inlined)
+            |          __libc_start_call_main
+            |          main
+            |          CGSolverSparse::read_matrix
+            |          MatrixCOO::read
+            |          __isoc99_fscanf
+            |          __vfscanf_internal
+            |          __GI_____strtod_l_internal
+            |          
+             --0.62%--__GI_____strtod_l_internal
+                       round_and_return
+
+     2.17%     0.55%  cgsolver  ld-linux-x86-64.so.2             [.] _dl_relocate_object
+            |          
+            |--1.62%--_dl_relocate_object
+            |          elf_dynamic_do_Rela (inlined)
+            |          elf_machine_rela (inlined)
+            |          _dl_lookup_symbol_x
+            |          |          
+            |          |--0.63%--do_lookup_x
+            |          |          
+            |           --0.62%--dl_new_hash (inlined)
+            |          
+             --0.55%--.annobin__dl_help.end (inlined)
+                       _dl_start
+                       _dl_start_final (inlined)
+                       _dl_sysdep_start
+                       dl_main
+                       _dl_relocate_object
+                       elf_dynamic_do_Rela (inlined)
+                       elf_machine_rela (inlined)
+
+     2.17%     0.00%  cgsolver  ld-linux-x86-64.so.2             [.] elf_dynamic_do_Rela (inlined)
+            |
+            ---elf_dynamic_do_Rela (inlined)
+               elf_machine_rela (inlined)
+               |          
+                --1.62%--_dl_lookup_symbol_x
+                          |          
+                          |--0.63%--do_lookup_x
+                          |          
+                           --0.62%--dl_new_hash (inlined)
+
+     2.17%     0.00%  cgsolver  ld-linux-x86-64.so.2             [.] elf_machine_rela (inlined)
+            |
+            ---elf_machine_rela (inlined)
+               |          
+                --1.62%--_dl_lookup_symbol_x
+                          |          
+                          |--0.63%--do_lookup_x
+                          |          
+                           --0.62%--dl_new_hash (inlined)
+
+     1.77%     0.99%  cgsolver  ld-linux-x86-64.so.2             [.] _dl_lookup_symbol_x
+            |          
+            |--0.99%--.annobin__dl_help.end (inlined)
+            |          _dl_start
+            |          _dl_start_final (inlined)
+            |          _dl_sysdep_start
+            |          dl_main
+            |          _dl_relocate_object
+            |          elf_dynamic_do_Rela (inlined)
+            |          elf_machine_rela (inlined)
+            |          _dl_lookup_symbol_x
+            |          |          
+            |           --0.62%--dl_new_hash (inlined)
+            |          
+             --0.79%--_dl_lookup_symbol_x
+                       do_lookup_x
+
+     0.94%     0.94%  cgsolver  libc.so.6                        [.] _IO_sputbackc
+            |
+            ---_start
+               __libc_start_main_alias_2 (inlined)
+               __libc_start_call_main
+               main
+               CGSolverSparse::read_matrix
+               MatrixCOO::read
+               __isoc99_fscanf
+               __vfscanf_internal
+               __GI__IO_sputbackc (inlined)
+
+     0.94%     0.00%  cgsolver  libc.so.6                        [.] __GI__IO_sputbackc (inlined)
+            |
+            ---__GI__IO_sputbackc (inlined)
+
+     0.79%     0.44%  cgsolver  ld-linux-x86-64.so.2             [.] do_lookup_x
+     0.62%     0.00%  cgsolver  ld-linux-x86-64.so.2             [.] dl_new_hash (inlined)
+            |
+            ---dl_new_hash (inlined)
+
+     0.62%     0.62%  cgsolver  libc.so.6                        [.] round_and_return
+            |
+            ---_start
+               __libc_start_main_alias_2 (inlined)
+               __libc_start_call_main
+               main
+               CGSolverSparse::read_matrix
+               MatrixCOO::read
+               __isoc99_fscanf
+               __vfscanf_internal
+               __GI_____strtod_l_internal
+               round_and_return
+
+     0.61%     0.61%  cgsolver  libm.so.6                        [.] 0x000000000006de07
+            |
+            ---_start
+               __libc_start_main_alias_2 (inlined)
+               __libc_start_call_main
+               main
+               Solver::init_source_term
+               0x7f858d5fae07
+
+     0.61%     0.00%  cgsolver  cgsolver                         [.] Solver::init_source_term
+            |
+            ---Solver::init_source_term
+               0x7f858d5fae07
+
+     0.61%     0.00%  cgsolver  libm.so.6                        [.] 0x00007f858d5fae07
+            |
+            ---0x7f858d5fae07
+
+     0.59%     0.59%  cgsolver  libc.so.6                        [.] __memset_evex_erms
+            |
+            ---_start
+               __libc_start_main_alias_2 (inlined)
+               __libc_start_call_main
+               main
+               CGSolverSparse::solve
+               MatrixCOO::mat_vec (inlined)
+               std::fill_n<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double> > >, unsigned long, double> (inlined)
+               std::__fill_n_a<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double> > >, unsigned long, double> (inlined)
+               std::__fill_a<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double> > >, double> (inlined)
+               std::__fill_a1<double*, std::vector<double, std::allocator<double> >, double> (inlined)
+               std::__fill_a1<double*, double> (inlined)
+               __memset_evex_erms
+
+     0.59%     0.00%  cgsolver  cgsolver                         [.] std::fill_n<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double> > >, unsigned long, double> (inlined)
+            |
+            ---std::fill_n<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double> > >, unsigned long, double> (inlined)
+               std::__fill_n_a<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double> > >, unsigned long, double> (inlined)
+               std::__fill_a<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double> > >, double> (inlined)
+               std::__fill_a1<double*, std::vector<double, std::allocator<double> >, double> (inlined)
+               std::__fill_a1<double*, double> (inlined)
+               __memset_evex_erms
+
+     0.59%     0.00%  cgsolver  cgsolver                         [.] std::__fill_n_a<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double> > >, unsigned long, double> (inlined)
+            |
+            ---std::__fill_n_a<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double> > >, unsigned long, double> (inlined)
+               std::__fill_a<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double> > >, double> (inlined)
+               std::__fill_a1<double*, std::vector<double, std::allocator<double> >, double> (inlined)
+               std::__fill_a1<double*, double> (inlined)
+               __memset_evex_erms
+
+     0.59%     0.00%  cgsolver  cgsolver                         [.] std::__fill_a<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double> > >, double> (inlined)
+            |
+            ---std::__fill_a<__gnu_cxx::__normal_iterator<double*, std::vector<double, std::allocator<double> > >, double> (inlined)
+               std::__fill_a1<double*, std::vector<double, std::allocator<double> >, double> (inlined)
+               std::__fill_a1<double*, double> (inlined)
+               __memset_evex_erms
+
+     0.59%     0.00%  cgsolver  cgsolver                         [.] std::__fill_a1<double*, std::vector<double, std::allocator<double> >, double> (inlined)
+            |
+            ---std::__fill_a1<double*, std::vector<double, std::allocator<double> >, double> (inlined)
+               std::__fill_a1<double*, double> (inlined)
+               __memset_evex_erms
+
+     0.59%     0.00%  cgsolver  cgsolver                         [.] std::__fill_a1<double*, double> (inlined)
+            |
+            ---std::__fill_a1<double*, double> (inlined)
+               __memset_evex_erms
+
+     0.39%     0.39%  cgsolver  libc.so.6                        [.] __strchr_evex
+     0.39%     0.00%  cgsolver  libc.so.6                        [.] __fopen_internal
+     0.39%     0.00%  cgsolver  libc.so.6                        [.] __GI__IO_file_fopen (inlined)
+     0.39%     0.00%  cgsolver  libc.so.6                        [.] __strstr_sse2
+     0.35%     0.35%  cgsolver  ld-linux-x86-64.so.2             [.] strcmp
+     0.35%     0.00%  cgsolver  ld-linux-x86-64.so.2             [.] check_match
+     0.21%     0.21%  cgsolver  [unknown]                        [k] 0xffffffff8da00fb7
+     0.20%     0.00%  cgsolver  ld-linux-x86-64.so.2             [.] do_lookup_unique (inlined)
+     0.20%     0.00%  cgsolver  ld-linux-x86-64.so.2             [.] _dl_receive_error
+     0.20%     0.00%  cgsolver  ld-linux-x86-64.so.2             [.] version_check_doit
+     0.20%     0.00%  cgsolver  ld-linux-x86-64.so.2             [.] _dl_check_all_versions
+     0.20%     0.00%  cgsolver  ld-linux-x86-64.so.2             [.] _dl_check_map_versions
+     0.20%     0.00%  cgsolver  ld-linux-x86-64.so.2             [.] find_needed (inlined)
+     0.20%     0.00%  cgsolver  ld-linux-x86-64.so.2             [.] _dl_name_match_p
+     0.15%     0.00%  cgsolver  ld-linux-x86-64.so.2             [.] setup_vdso_pointers (inlined)
+     0.15%     0.00%  cgsolver  ld-linux-x86-64.so.2             [.] dl_vdso_vsym (inlined)
+     0.06%     0.06%  cgsolver  ld-linux-x86-64.so.2             [.] __GI___tunables_init
+     0.01%     0.00%  cgsolver  ld-linux-x86-64.so.2             [.] elf_dynamic_do_Rela (inlined)
+
+
+#
+# (Tip: Show current config key-value pairs: perf config --list)
+#
