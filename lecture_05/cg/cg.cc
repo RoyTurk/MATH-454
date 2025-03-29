@@ -4,6 +4,7 @@
 #include <cblas.h>
 #include <cmath>
 #include <iostream>
+#include <mpi.h>
 
 const double NEARZERO = 1.0e-14;
 const bool DEBUG = false;
@@ -110,9 +111,58 @@ CGSolverSparse::solve(std::vector<double> &x)
 void
 CGSolverSparse::read_matrix(const std::string &filename)
 {
-  m_A.read(filename);
-  m_m = m_A.m();
-  m_n = m_A.n();
+  int rank, size;
+  MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+  MPI_Comm_size(MPI_COMM_WORLD, &size);
+
+  if (rank == 0)
+  {
+    m_A.read(filename);
+    m_m = m_A.m();
+    m_n = m_A.n();
+  }
+
+  MPI_Bcast(&m_m, 1, MPI_INT, 0, MPI_COMM_WORLD);
+  MPI_Bcast(&m_n, 1, MPI_INT, 0, MPI_COMM_WORLD);
+  
+  int nnz = (rank == 0) ? m_A.nz() : 0;
+  MPI_Bcast(&nnz, 1, MPI_INT, 0, MPI_COMM_WORLD);
+
+  int base = nnz / size;
+  int rem = nnz % size;
+  int local_nnz = base + (rank < rem ? 1 : 0);
+
+  if (rank == 0)
+  {
+    int offset = 0;
+
+    for (int r = 1; r < size; ++r)
+    {
+      int count = base + (r < rem ? 1 : 0);
+
+      MPI_Send(m_A.irn.data() + offset, count, MPI_INT, r, 0, MPI_COMM_WORLD);
+      MPI_Send(m_A.jcn.data() + offset, count, MPI_INT, r, 1, MPI_COMM_WORLD);
+      MPI_Send(m_A.a.data() + offset, count, MPI_DOUBLE, r, 2, MPI_COMM_WORLD);
+
+      offset += count;
+    }
+
+    int count = base + (0 < rem ? 1 : 0);
+    m_A.irn.erase(m_A.irn.begin() + count, m_A.irn.end());
+    m_A.jcn.erase(m_A.jcn.begin() + count, m_A.jcn.end());
+    m_A.a.erase(m_A.a.begin() + count, m_A.a.end());
+  } else
+  {
+
+    m_A.irn.resize(local_nnz);
+    m_A.jcn.resize(local_nnz);
+    m_A.a.resize(local_nnz);
+
+    MPI_Recv(m_A.irn.data(), local_nnz, MPI_INT, 0, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+    MPI_Recv(m_A.jcn.data(), local_nnz, MPI_INT, 0, 1, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+    MPI_Recv(m_A.a.data(), local_nnz, MPI_DOUBLE, 0, 2, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+
+  }
 }
 
 /*
