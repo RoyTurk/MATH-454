@@ -1,6 +1,7 @@
 #include <algorithm>
 #include <string>
 #include <vector>
+#include <mpi.h>
 
 #ifndef __MATRIX_COO_H_
 #define __MATRIX_COO_H_
@@ -18,18 +19,24 @@ public:
   void read(const std::string & filename);
 
   void mat_vec(const std::vector<double> & x, std::vector<double> & y) {
-    std::fill_n(y.begin(), y.size(), 0.);
+
+    int rank, size;
+    MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+    MPI_Comm_size(MPI_COMM_WORLD, &size);
+
+    std::vector<double> y_local(y.size(), 0.0);
 
     for (size_t z = 0; z < irn.size(); ++z) {
       auto i = irn[z];
       auto j = jcn[z];
       auto a_ = a[z];
 
-      y[i] += a_ * x[j];
-      if (m_is_sym and (i != j)) {
-        y[j] += a_ * x[i];
+      y_local[i] += a_ * x[j];
+      if (m_is_sym && i != j) {
+        y_local[j] += a_ * x[i];
       }
     }
+    MPI_Allreduce(y_local.data(), y.data(), y.size(), MPI_DOUBLE, MPI_SUM, MPI_COMM_WORLD);
   }
 
   std::vector<int> irn;
