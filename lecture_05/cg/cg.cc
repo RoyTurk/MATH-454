@@ -42,6 +42,10 @@ Sparse version of the cg solver
 void
 CGSolverSparse::solve(std::vector<double> &x)
 {
+
+  int rank;
+  MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+
   std::vector<double> r(m_n);
   std::vector<double> p(m_n);
   std::vector<double> Ap(m_n);
@@ -56,8 +60,10 @@ CGSolverSparse::solve(std::vector<double> &x)
   p = r;
 
   // rsold = r' * r;
-  auto rsold = cblas_ddot(m_n, r.data(), 1, r.data(), 1);
-
+  auto local_dot = cblas_ddot(m_n, r.data(), 1, r.data(), 1);
+  auto rsold = 0.0;
+  MPI_Allreduce(&local_dot, &rsold, 1, MPI_DOUBLE, MPI_SUM, MPI_COMM_WORLD);
+  
   // for i = 1:length(b)
   int k = 0;
   for (; k < m_n; ++k)
@@ -66,7 +72,11 @@ CGSolverSparse::solve(std::vector<double> &x)
     m_A.mat_vec(p, Ap);
 
     // alpha = rsold / (p' * Ap);
-    auto alpha = rsold / std::max(cblas_ddot(m_n, p.data(), 1, Ap.data(), 1), rsold * NEARZERO);
+    auto local_pAp = cblas_ddot(m_n, p.data(), 1, Ap.data(), 1);
+    auto global_pAp = 0.0;
+    MPI_Allreduce(&local_pAp, &global_pAp, 1, MPI_DOUBLE, MPI_SUM, MPI_COMM_WORLD);
+
+    auto alpha = rsold / std::max(global_pAp, rsold * NEARZERO);
 
     // x = x + alpha * p;
     cblas_daxpy(m_n, alpha, p.data(), 1, x.data(), 1);
@@ -75,7 +85,10 @@ CGSolverSparse::solve(std::vector<double> &x)
     cblas_daxpy(m_n, -alpha, Ap.data(), 1, r.data(), 1);
 
     // rsnew = r' * r;
-    auto rsnew = cblas_ddot(m_n, r.data(), 1, r.data(), 1);
+    auto local_rsnew = cblas_ddot(m_n, r.data(), 1, r.data(), 1);
+    auto rsnew = 0.0;
+    MPI_Allreduce(&local_rsnew, &rsnew, 1, MPI_DOUBLE, MPI_SUM, MPI_COMM_WORLD);
+
 
     // if sqrt(rsnew) < 1e-10
     //   break;
@@ -90,20 +103,32 @@ CGSolverSparse::solve(std::vector<double> &x)
 
     // rsold = rsnew;
     rsold = rsnew;
-    if (DEBUG)
+    if (DEBUG && rank == 0)
     {
       std::cout << "\t[STEP " << k << "] residual = " << std::scientific << std::sqrt(rsold) << "\r" << std::flush;
     }
   }
 
-  if (DEBUG)
+  if (DEBUG && rank == 0)
   {
     m_A.mat_vec(x, r);
     cblas_daxpy(m_n, -1., m_b.data(), 1, r.data(), 1);
-    auto res =
-      std::sqrt(cblas_ddot(m_n, r.data(), 1, r.data(), 1)) / std::sqrt(cblas_ddot(m_n, m_b.data(), 1, m_b.data(), 1));
-    auto nx = std::sqrt(cblas_ddot(m_n, x.data(), 1, x.data(), 1));
-    std::cout << "\t[STEP " << k << "] residual = " << std::scientific << std::sqrt(rsold) << ", ||x|| = " << nx
+
+    auto local_res = cblas_ddot(m_n, r.data(), 1, r.data(), 1);
+    auto global_res = 0.0;
+    MPI_Allreduce(&local_res, &global_res, 1, MPI_DOUBLE, MPI_SUM, MPI_COMM_WORLD);
+
+    auto local_bnorm = cblas_ddot(m_n, m_b.data(), 1, m_b.data(), 1);
+    auto global_bnorm = 0.0;
+    MPI_Allreduce(&local_bnorm, &global_bnorm, 1, MPI_DOUBLE, MPI_SUM, MPI_COMM_WORLD);
+
+    auto res = std::sqrt(global_res) / std::sqrt(global_bnorm);
+    
+    auto local_xnorm = cblas_ddot(m_n, x.data(), 1, x.data(), 1);
+    auto global_xnorm = 0.0
+    MPI_Allreduce(&local_xnorm, &global_xnorm, 1, MPI_DOUBLE, MPI_SUM, MPI_COMM_WORLD);
+
+    std::cout << "\t[STEP " << k << "] residual = " << std::scientific << std::sqrt(rsold) << ", ||x|| = " << std::sqrt(global_xnorm)
               << ", ||Ax - b||/||b|| = " << res << std::endl;
   }
 }
