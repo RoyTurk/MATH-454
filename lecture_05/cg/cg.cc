@@ -125,7 +125,7 @@ CGSolverSparse::solve(std::vector<double> &x)
     auto res = std::sqrt(global_res) / std::sqrt(global_bnorm);
     
     auto local_xnorm = cblas_ddot(m_n, x.data(), 1, x.data(), 1);
-    auto global_xnorm = 0.0
+    auto global_xnorm = 0.0;
     MPI_Allreduce(&local_xnorm, &global_xnorm, 1, MPI_DOUBLE, MPI_SUM, MPI_COMM_WORLD);
 
     std::cout << "\t[STEP " << k << "] residual = " << std::scientific << std::sqrt(rsold) << ", ||x|| = " << std::sqrt(global_xnorm)
