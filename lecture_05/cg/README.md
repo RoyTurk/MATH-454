@@ -18,7 +18,11 @@ $ make
 You should see this output (timing is indicative) :
 
 ```
+<<<<<<< HEAD
 $ srun ./conjugategradient lap2D_5pt_n100.mtx 
+=======
+$ srun ./cgsolver lap2D_5pt_n100.mtx 
+>>>>>>> f5bf36b53979d660a5548267f533248dba98cff6
 size of matrix = 10000 x 10000
 Call cgsolver() on matrix size (10000 x 10000)
 	[STEP 488] residual = 1.103472E-10
