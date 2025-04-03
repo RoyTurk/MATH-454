@@ -7,7 +7,7 @@
 #include <mpi.h>
 
 const double NEARZERO = 1.0e-14;
-const bool DEBUG = false;
+const bool DEBUG = true;
 
 /*
     cgsolver solves the linear equation A*x = b where A is

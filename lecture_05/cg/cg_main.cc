@@ -19,6 +19,8 @@ main(int argc, char **argv)
   MPI_Comm_rank(MPI_COMM_WORLD, &rank);
   MPI_Comm_size(MPI_COMM_WORLD, &size);
 
+  std::cout << "Hello from rank " << rank << " out of " << size << " processes." << std::endl;
+
   if (argc < 2)
   {
     if (rank == 0)
