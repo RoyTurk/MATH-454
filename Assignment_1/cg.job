@@ -3,4 +3,4 @@
 #SBATCH --account=math-454
 #SBATCH -n 4
 
-srun cgsolver ../lecture_05/cg/lap2D_5pt_n200.mtx
+srun cgsolver lap2D_5pt_n100.mtx
